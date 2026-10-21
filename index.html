@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="TrackletNav: Real-world Topological Navigation with Long-Term Capability in Complex Outdoor Scenes">
+  <meta name="keywords" content="TrackletNav, topological navigation, visual place recognition, humanoid, teach and repeat">
+  <title>TrackletNav</title>
+
+  <!-- Social preview (fill in after deployment) -->
+  <meta property="og:title" content="TrackletNav: Real-world Topological Navigation with Long-Term Capability in Complex Outdoor Scenes">
+  <meta property="og:description" content="Long-horizon navigation from one teach video on a humanoid in complex outdoor scenes.">
+  <meta property="og:image" content="static/images/teaser.jpg">
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/academicons@1.9.4/css/academicons.min.css">
+
+  <style>
+    body { font-family: 'Noto Sans', sans-serif; background: #fff; }
+    .publication-title { font-family: 'Google Sans', sans-serif; }
+    .publication-authors { font-family: 'Google Sans', sans-serif; }
+    .publication-authors a { color: hsl(204, 86%, 53%) !important; }
+    .publication-venue { color: #555; font-weight: 600; margin-top: .5rem; }
+    .link-block a { margin-top: 5px; margin-bottom: 5px; }
+    .title.is-3 { font-family: 'Google Sans', sans-serif; }
+    .content p { text-align: justify; }
+    .teaser .hero-body { padding-top: 0; padding-bottom: 3rem; }
+    .figure-caption { font-size: .95rem; color: #555; margin-top: .6rem; text-align: center !important; }
+    .figure-caption.is-justified { text-align: justify !important; text-align-last: left; }
+    /* Placeholder boxes: delete each once the real media is in */
+    .placeholder {
+      border: 2px dashed #b5b5b5; border-radius: 8px; background: #fafafa;
+      color: #7a7a7a; display: flex; align-items: center; justify-content: center;
+      text-align: center; padding: 1rem; min-height: 220px; font-size: .95rem;
+    }
+    .placeholder.tall { min-height: 360px; }
+    .todo { background: #fff3cd; padding: 0 .25rem; border-radius: 3px; }
+    .results-table td, .results-table th { text-align: center !important; }
+    .results-table .best { font-weight: 700; }
+    pre { background: #f5f5f5; border-radius: 6px; font-size: .85rem; overflow-x: auto; }
+    .katex-display { overflow-x: auto; overflow-y: hidden; padding: .25rem 0; }
+    html, body { overflow-x: hidden; }
+    .copy-btn { float: right; }
+    footer.footer { padding: 2rem 1.5rem 3rem; }
+  </style>
+</head>
+<body>
+
+<!-- ====================== TITLE & AUTHORS ====================== -->
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">TrackletNav</h1>
+          <h2 class="title is-3 publication-title" style="font-weight:400">
+            Real-world Topological Navigation with Long-Term Capability in Complex Outdoor Scenes
+          </h2>
+
+          <!-- Anonymous during double-blind review; add names and affiliations after acceptance -->
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">Anonymous Author(s)</span>
+          </div>
+          <div class="publication-venue">SISREN Workshop @ CoRL 2026</div>
+
+          <!-- Link buttons: change href, or delete a button you don't have yet -->
+          <div class="publication-links" style="margin-top:1rem">
+            <span class="link-block">
+              <a href="static/TrackletNav.pdf" class="button is-normal is-rounded is-dark">
+                <span class="icon"><i class="fas fa-file-pdf"></i></span><span>Paper</span>
+              </a>
+            </span>
+            <span class="link-block">
+              <a href="#" class="button is-normal is-rounded is-dark">
+                <span class="icon"><i class="ai ai-arxiv"></i></span><span>arXiv</span>
+              </a>
+            </span>
+            <span class="link-block">
+              <a href="#teaser" class="button is-normal is-rounded is-dark">
+                <span class="icon"><i class="fab fa-youtube"></i></span><span>Video</span>
+              </a>
+            </span>
+            <span class="link-block">
+              <a href="#" class="button is-normal is-rounded is-dark">
+                <span class="icon"><i class="fab fa-github"></i></span><span>Code (coming soon)</span>
+              </a>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====================== TEASER ====================== -->
+<section class="hero teaser" id="teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <video autoplay muted loop playsinline controls preload="metadata" width="100%"
+             poster="static/images/teaser_poster.jpg" style="border-radius:8px">
+        <source src="static/videos/teaser.mp4" type="video/mp4">
+      </video>
+      <h2 class="subtitle has-text-centered" style="margin-top:1rem">
+        <b>TrackletNav</b> splits a single teach video into short tracklets and pairs the local planner with a
+        VLM global planner that notices and corrects its mistakes on long outdoor routes.
+      </h2>
+    </div>
+  </div>
+</section>
+
+<!-- ====================== ABSTRACT ====================== -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Topological navigation enables long-horizon navigation in unknown environments by decomposing complex routes
+            into short-range subgoal-reaching tasks. However, existing methods often struggle in complex urban environments
+            due to two key challenges: <b>perceptual ambiguity</b>, where visually similar locations or directions lead to
+            incorrect subgoal selection, and <b>execution drift</b>, where imperfect local navigation causes accumulated
+            deviations from the planned trajectory. We identify these failure modes through real-world experiments and
+            reproduce them in simulation to demonstrate their impact on long-horizon navigation.
+          </p>
+          <p>
+            To address these challenges, we propose <b>TrackletNav</b>, a framework that decomposes long-horizon routes into
+            shorter topological navigation segments, termed tracklets. TrackletNav combines history-aware memory to
+            disambiguate visually similar subgoals with tracklet-based decomposition and agent-guided correction to mitigate
+            execution drift. Extensive real-world evaluations in complex urban environments demonstrate that TrackletNav
+            reduces the average remaining distance to the goal by over 50% compared to state-of-the-art topological
+            navigation methods. Our findings further highlight visual place recognition failures as a remaining bottleneck
+            toward reliable long-horizon navigation.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="columns is-centered" id="pipeline">
+      <div class="column">
+        <a href="static/images/pipeline.png" target="_blank" title="Open full size">
+          <img src="static/images/pipeline.png" alt="TrackletNav pipeline" style="width:100%">
+        </a>
+        <p class="figure-caption">Overview of TrackletNav. A Qwen3-VL global planner supervises the GuideNav local planner
+          tracklet by tracklet: it reverses the robot when a place-recognition error sends it the wrong way, and corrects
+          its trajectory whenever it stops partway through a tracklet.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====================== CHALLENGES ====================== -->
+<section class="section" style="padding-top:0">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Why Is Real-World Topological Navigation Hard?</h2>
+    <div class="content">
+      <p>
+        A topological navigation system selects the next subgoal by matching the current view against image nodes with
+        visual place recognition (VPR), and a goal-reaching policy drives toward it. Existing methods are mostly evaluated
+        indoors or in outdoor scenes with distinctive landmarks. In complex urban scenes, we identify two failure modes
+        through real-world experiments and reproduce them in simulation:
+      </p>
+    </div>
+    <div class="columns">
+      <div class="column">
+        <div class="box" style="height:100%">
+          <p class="title is-5">1. Perceptual ambiguity</p>
+          <p>In repetitive environments, distinct locations or directions look alike, so subgoal selection picks the wrong
+            node, for example on a long tree-lined walk.</p>
+        </div>
+      </div>
+      <div class="column">
+        <div class="box" style="height:100%">
+          <p class="title is-5">2. Execution drift</p>
+          <p>Uneven terrain, obstacle avoidance and other disturbances push the robot off the planned trajectory, and the
+            errors accumulate over long routes.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====================== METHOD ====================== -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Method</h2>
+
+    <div class="content">
+      <p>
+        TrackletNav repeats a route from one teach video using only an RGB camera, with no odometry or GPS. Offline, it
+        splits the route into short, one-way <b>tracklets</b>: at junctions found from the teach video, and at extra cuts
+        inside long tracklets, placed so that look-alike keyframes fall into different tracklets. During navigation, only
+        the keyframes of the active tracklet are candidates for localization.
+      </p>
+      <p>
+        Online, a <b>local planner</b> (GuideNav) localizes and drives within the active tracklet, while a
+        <b>VLM global planner</b> (Qwen3-VL) checks that it follows the plan. A <b>history-aware memory</b> of motion
+        captions and recent frames is compared with each tracklet's text summary and keyframes. With this,
+        <b>agent-guided correction</b> reverses the robot when a place-recognition error has sent it the wrong way, and
+        issues small corrective turns when the local planner stops partway. The framework is model-agnostic.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ====================== SIMULATION DEMO ====================== -->
+<section class="section" id="sim-demo" style="padding-top:0">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Simulation Demo</h2>
+    <video autoplay muted loop playsinline controls preload="metadata" width="100%"
+           poster="static/images/demo_sim_poster.jpg" style="border-radius:8px">
+      <source src="static/videos/demo_sim.mp4" type="video/mp4">
+    </video>
+    <p class="figure-caption">Closed-loop navigation in an indoor digital twin. Left: GuideNav (baseline) loses the route
+      and fails. Right: TrackletNav (ours) reaches the goal.</p>
+  </div>
+</section>
+
+<!-- ====================== RESULTS ====================== -->
+<section class="section" style="padding-top:0">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Results</h2>
+
+    <h3 class="title is-4">Real-to-sim digital twins</h3>
+    <div class="content">
+      <p>Following Wanderland, we scan four real scenes with a LiDAR scanner and rebuild them as photorealistic 3D Gaussian
+        splatting digital twins (routes of 64&ndash;156 m). Each simulated run adds the walking gait's camera motion, motion
+        blur, and the G1's measured command delay, so real-world failures can be reproduced and every method runs many
+        times under the same conditions.</p>
+    </div>
+    <img src="static/images/sim_routes.jpg" alt="Simulation routes: 3DGS renders and taught routes on occupancy grids"
+         style="width:100%; border-radius:6px">
+    <p class="figure-caption">Simulation routes. Top: 3DGS render of each digital twin. Bottom: the taught route on the
+      occupancy grid of the scan (red circle: start, yellow star: goal).</p>
+
+    <h3 class="title is-4" style="margin-top:2rem">Look-alike regions break place recognition</h3>
+    <div class="content">
+      <p>On the Long-Horizon route, the regions that confuse VPR on the real route also confuse it in the digital twin.</p>
+    </div>
+    <a href="static/images/vpr_failure.png" target="_blank" title="Open full size">
+      <img src="static/images/vpr_failure.png" alt="VPR fails in the same look-alike regions on the real route and in its digital twin" style="width:100%">
+    </a>
+    <p class="figure-caption is-justified"><b>Real-to-sim:</b> VPR fails in the same look-alike regions on the real route and in its
+      digital twin. <b>Real route:</b> our real teach route (red circle: start; yellow star: goal).
+      <b>Look-alike keyframes:</b> KF 15 and 29 on the tree-lined walk and KF 46 and 54 beside the building.
+      <b>Sim. twin:</b> VPR failure rate in the Long-Horizon twin: share of images matched to a place more than 5&nbsp;m
+      away, by camera turn.</p>
+
+    <h3 class="title is-4" style="margin-top:2rem">Real-world experiments</h3>
+    <div class="columns is-vcentered">
+      <div class="column">
+        <div class="content">
+          <p>We deploy TrackletNav on a Unitree G1 humanoid with whole-body control and a head-mounted RealSense D455
+            camera on a custom mount, and run 70 trials across one indoor and two outdoor scenes. Bipedal walking adds
+            execution noise and motion blur. Outdoors, each run allows up to three human interventions.</p>
+        </div>
+      </div>
+      <div class="column is-one-third">
+        <img src="static/images/hardware.jpg" alt="Unitree G1 with a custom camera mount" style="width:100%; border-radius:6px">
+        <p class="figure-caption">Unitree G1 with a custom head camera mount.</p>
+      </div>
+    </div>
+    <img src="static/images/real_scenes.jpg" alt="Real-world scenes: indoor lobby, landmarkless park, and long-horizon outdoor route"
+         style="width:100%; border-radius:6px">
+    <p class="figure-caption">Real-world scenes. Top left: indoor lobby. Bottom left: landmarkless outdoor scene.
+      Right: the long-horizon outdoor route from start to goal.</p>
+
+    <div class="columns" style="margin-top:1rem">
+      <div class="column">
+        <div class="box" style="height:100%">
+          <p class="title is-5">Indoor</p>
+          <p>Walk down a hallway, turn, and stop facing the elevator door. All baselines work well here, on par with a
+            VLA (LightNav) fine-tuned on this scene.</p>
+          <p style="margin-top:.75rem"><b>Success:</b> TrackletNav 9/10, GuideNav 8/10, PixelLoop 9/10, LightNav 9/10</p>
+        </div>
+      </div>
+      <div class="column">
+        <div class="box" style="height:100%">
+          <p class="title is-5">Long-horizon outdoor</p>
+          <p>A long urban walk from a square, along repetitive paved paths, to a red sculpture. TrackletNav succeeds far
+            more often and ends much closer to the goal.</p>
+          <p style="margin-top:.75rem"><b>Success:</b> TrackletNav 4/5, GuideNav 1/5, PixelLoop 0/5<br>
+            <b>Remaining distance:</b> 13.2 m vs. 52.9 m and 79.7 m</p>
+        </div>
+      </div>
+      <div class="column">
+        <div class="box" style="height:100%">
+          <p class="title is-5">Landmarkless park (limitation)</p>
+          <p>Every direction shows only trees and chairs, so place recognition fails and the text memory gives no
+            guidance. VPR remains the bottleneck of the framework.</p>
+          <p style="margin-top:.75rem"><b>Success:</b> TrackletNav 2/5, GuideNav 2/5, PixelLoop 3/5</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ====================== BIBTEX ====================== -->
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <button class="button is-small copy-btn" onclick="copyBib(this)">
+      <span class="icon"><i class="far fa-copy"></i></span><span>Copy</span>
+    </button>
+<pre><code id="bibtex">@inproceedings{trackletnav2026,
+  title     = {TrackletNav: Real-world Topological Navigation with Long-Term Capability in Complex Outdoor Scenes},
+  author    = {Anonymous},
+  booktitle = {SISREN Workshop at the Conference on Robot Learning (CoRL)},
+  year      = {2026}
+}</code></pre>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content has-text-centered">
+          <p>
+            This website is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+            It borrows the design of the <a href="https://github.com/nerfies/nerfies.github.io">Nerfies</a> project page.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  function copyBib(btn) {
+    const text = document.getElementById('bibtex').innerText;
+    const label = btn.querySelector('span:last-child');
+    const done = () => { label.textContent = 'Copied'; setTimeout(() => label.textContent = 'Copy', 1500); };
+    if (navigator.clipboard) navigator.clipboard.writeText(text).then(done).catch(() => {});
+  }
+</script>
+</body>
+</html>
